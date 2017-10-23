@@ -41,7 +41,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-def siteUrl = 'https://github.com/DerekAndroid/DemoSample.git'      // 項目的主頁
+def siteUrl = 'https://github.com/DerekAndroid/DemoSample'      // 項目的主頁
 def gitUrl = 'https://github.com/DerekAndroid/DemoSample.git'       // Git倉庫的url
 group = "com.kered.demosample"         // Maven Group ID for the artifact，一般填你唯一的包名
 install {
@@ -99,7 +99,8 @@ bintray {
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
-        repo = "maven"      // 這邊是對應jCenter的倉庫名稱
+        userOrg="kered"
+        repo = "DKLog"      // 這邊是對應jCenter的倉庫名稱
         name = "DKLog"    // 發佈到jCenter上的項目名稱
         websiteUrl = siteUrl
         vcsUrl = gitUrl
