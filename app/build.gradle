@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
 dependencies {
@@ -29,4 +30,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.kered.demosample:dklog:1.0.0'
     testCompile 'junit:junit:4.12'
+
+    /* airbnb lottie-android animate */
+    compile 'com.airbnb.android:lottie:2.2.5'
 }
