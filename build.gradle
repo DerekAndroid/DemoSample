@@ -19,6 +19,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+
+        maven {
+            url  "https://kered.bintray.com/DKLog"
+        }
     }
 
     // jCenter; 加上這些為了防止編碼失敗
