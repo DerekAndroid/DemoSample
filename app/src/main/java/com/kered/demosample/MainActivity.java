@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
-
+    private Toolbar mToolbar;
     private int newValue = 500;
     private static int value = 2000;
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initViews() {
+        initToolBar("Airbnb");
         mContainer = findViewById(R.id.main_container);
         toolbar = findViewById(R.id.toolbar);
         fab = findViewById(R.id.fab);
@@ -113,6 +115,18 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    protected void initToolBar(String title) {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            setTitle(title);
+        }
     }
 
     @Override
