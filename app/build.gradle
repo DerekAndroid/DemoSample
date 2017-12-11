@@ -12,11 +12,31 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Specifies two flavor dimensions.
+    flavorDimensions "mode"
+
+    productFlavors {
+        lite {
+            resValue "string", "my_app_name", "Demo Lite"
+            dimension "mode"
+        }
+
+        pro {
+            applicationIdSuffix ".pro"
+            resValue "string", "my_app_name", "Demo Pro"
+            dimension "mode"
+        }
+    }
+
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
@@ -29,8 +49,14 @@ dependencies {
     compile 'com.android.support:design:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.kered.demosample:dklog:1.0.0'
+
+    compile 'com.xw.repo:bubbleseekbar:3.9'
     testCompile 'junit:junit:4.12'
 
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.facebook.fresco:fresco:1.5.0'
+    compile 'com.facebook.fresco:animated-gif:1.5.0'
+    compile 'com.github.stfalcon:frescoimageviewer:0.5.0'
     /* airbnb lottie-android animate */
     compile 'com.airbnb.android:lottie:2.2.5'
 }

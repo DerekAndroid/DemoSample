@@ -18,7 +18,9 @@ import com.kered.dklog.Trace;
  * Created by derek_chang on 2017/11/7.
  */
 
-
+/* reference
+* https://www.lottiefiles.com/132-play-button
+* */
 public class AirbnbLottieFrgment extends Fragment {
     public static final String TAG = "AirbnbLottieFrgment";
     protected View mMainLayout;
@@ -31,10 +33,17 @@ public class AirbnbLottieFrgment extends Fragment {
     }
 
     private void initViews() {
-        LottieAnimationView animationView = mMainLayout.findViewById(R.id.animation_view);
+        final LottieAnimationView animationView = mMainLayout.findViewById(R.id.animation_view);
         animationView.setAnimation("loading.json");
-        animationView.loop(false);
-        animationView.playAnimation();
+        animationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!animationView.isAnimating()){
+                    animationView.playAnimation();
+                }
+            }
+        });
+
 
 
         final LottieToggleAnimationView toggleButton = mMainLayout.findViewById(R.id.animationToggle);

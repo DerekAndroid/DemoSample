@@ -1,6 +1,7 @@
 package com.kered.demosample;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,7 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.kered.demosample.com.kered.demosample.fragment.AirbnbLottieFrgment;
+import com.kered.demosample.com.kered.demosample.fragment.BubbleSeekBarFrgment;
 import com.kered.dklog.DKLog;
 
 public class MainActivity extends AppCompatActivity
@@ -27,7 +30,6 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private FrameLayout mContainer;
-    private Toolbar toolbar;
     private FloatingActionButton fab;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -40,8 +42,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DKLog.setEnable(true);
+        Fresco.initialize(this);
+
         setContentView(R.layout.activity_main);
         initViews();
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
     }
 
     private void changeFragment(int funcID, Bundle args, boolean pushStack, int containerId) {
@@ -58,6 +66,9 @@ public class MainActivity extends AppCompatActivity
         switch (funcID) {
             case Config.Fragment.LottieFragId:
                 fragmentClass = AirbnbLottieFrgment.class;
+                break;
+            case Config.Fragment.SeekBarFragId:
+                fragmentClass = BubbleSeekBarFrgment.class;
                 break;
         }
 
@@ -92,21 +103,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initViews() {
-        initToolBar("Airbnb");
-        mContainer = findViewById(R.id.main_container);
-        toolbar = findViewById(R.id.toolbar);
-        fab = findViewById(R.id.fab);
         drawer = findViewById(R.id.drawer_layout);
 
+        mContainer = findViewById(R.id.main_container);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        fab = findViewById(R.id.fab);
+
+        initToolBar("Airbnb");
+
         toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setSupportActionBar(toolbar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +130,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void initToolBar(String title) {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -171,9 +182,9 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             changeFragment(Config.Fragment.LottieFragId, null, true, mContainer.getId());
         } else if (id == R.id.nav_gallery) {
-
+            changeFragment(Config.Fragment.SeekBarFragId, null, true, mContainer.getId());
         } else if (id == R.id.nav_slideshow) {
-
+            changeFragment(Config.Fragment.SeekBarFragId, null, true, mContainer.getId());
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
