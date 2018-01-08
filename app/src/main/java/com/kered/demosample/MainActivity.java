@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_in);
     }
 
     private void changeFragment(int funcID, Bundle args, boolean pushStack, int containerId) {
@@ -184,9 +186,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             changeFragment(Config.Fragment.SeekBarFragId, null, true, mContainer.getId());
         } else if (id == R.id.nav_slideshow) {
-            changeFragment(Config.Fragment.SeekBarFragId, null, true, mContainer.getId());
+            launchMarket();
         } else if (id == R.id.nav_manage) {
-
+            showActivityFromBottom();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -196,5 +198,22 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void showActivityFromBottom(){
+        Intent intent = new Intent(this, HistoryOrderListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+
+    public void launchMarket() {
+        try {
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.hiiir.alley");
+            Intent goMarket = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(goMarket);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
