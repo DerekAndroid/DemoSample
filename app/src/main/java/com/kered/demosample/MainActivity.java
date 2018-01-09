@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.kered.demosample.com.kered.demosample.fragment.AirbnbLottieFrgment;
 import com.kered.demosample.com.kered.demosample.fragment.BubbleSeekBarFrgment;
+import com.kered.demosample.com.kered.demosample.fragment.LuckyDrawFrgment;
 import com.kered.dklog.DKLog;
 
 public class MainActivity extends AppCompatActivity
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case Config.Fragment.SeekBarFragId:
                 fragmentClass = BubbleSeekBarFrgment.class;
+                break;
+            case Config.Fragment.LuckyDrawFragId:
+                fragmentClass = LuckyDrawFrgment.class;
                 break;
         }
 
@@ -190,7 +194,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             showActivityFromBottom();
         } else if (id == R.id.nav_share) {
-
+            changeFragment(Config.Fragment.LuckyDrawFragId, null, true, mContainer.getId());
         } else if (id == R.id.nav_send) {
 
         }

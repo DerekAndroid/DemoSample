@@ -8,6 +8,7 @@ public class Config {
     public class Fragment{
         public static final int LottieFragId = 0x0001;
         public static final int SeekBarFragId = 0x0002;
+        public static final int LuckyDrawFragId = 0x0003;
     }
 
 }
