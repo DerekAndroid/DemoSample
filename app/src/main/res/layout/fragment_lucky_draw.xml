@@ -21,11 +21,21 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+    <Button
+        android:id="@+id/lucky_draw_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="開抽！"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
     <include
         android:layout_below="@id/appBar"
         android:id="@+id/lucky_draw_dialog"
         layout="@layout/layout_lucky_draw"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </RelativeLayout>

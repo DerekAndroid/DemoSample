@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -24,17 +25,23 @@ public class AlleyLuckyDrawAnimationUtils {
     public static final String TAG = AlleyLuckyDrawAnimationUtils.class.getSimpleName();
 
     private Context mContext;
+    private TextView mResultTextView;
     private ImageView mAnimationImageView;
     private SimpleDraweeView mBackgroundSimpleDraweeView;
     private boolean isResponse = false;
 
-    private FrameAnimation startAnimation;
-    private FrameAnimation repeatAnimation;
-    private FrameAnimation endAnimation;
+    private FrameAnimation mStartAnimation;
+    private FrameAnimation mRepeatAnimation;
+    private FrameAnimation mEndAnimation;
 
+    private String mDrawResult;
 
-    public AlleyLuckyDrawAnimationUtils(Context context, ImageView animationImageView, SimpleDraweeView backgroundSimpleDraweeView) {
+    public AlleyLuckyDrawAnimationUtils(Context context,
+                                        TextView resultTextView,
+                                        ImageView animationImageView,
+                                        SimpleDraweeView backgroundSimpleDraweeView) {
         mContext = context;
+        mResultTextView = resultTextView;
         mAnimationImageView = animationImageView;
         mBackgroundSimpleDraweeView = backgroundSimpleDraweeView;
     }
@@ -45,14 +52,19 @@ public class AlleyLuckyDrawAnimationUtils {
                 R.drawable.sp_lion_2,
                 R.drawable.sp_lion_3};
 
-        ViewGroup.LayoutParams lp = mAnimationImageView.getLayoutParams();
-        lp.height = (int) (1142 * 0.67);
-        lp.width = (int) (1440 * 0.67);
-        DKLog.d(TAG, Trace.getCurrentMethod() + lp.width + " , " + lp.height);
-        mAnimationImageView.setLayoutParams(lp);
+        int[] durationArray = {
+                2000,
+                500,
+                500
+        };
+//        ViewGroup.LayoutParams lp = mAnimationImageView.getLayoutParams();
+//        lp.height = 200;//(int) (1142 * 0.67);
+//        lp.width = 200;//(int) (1440 * 0.67);
+//        DKLog.d(TAG, Trace.getCurrentMethod() + lp.width + " , " + lp.height);
+//        mAnimationImageView.setLayoutParams(lp);
 
-        startAnimation = new FrameAnimation(mAnimationImageView, startArray, 200, false);
-        startAnimation.setAnimationListener(new FrameAnimation.AnimationListener() {
+        mStartAnimation = new FrameAnimation(mAnimationImageView, startArray, durationArray, false);
+        mStartAnimation.setAnimationListener(new FrameAnimation.AnimationListener() {
             @Override
             public void onAnimationStart() {
                 DKLog.d(TAG, Trace.getCurrentMethod());
@@ -76,8 +88,10 @@ public class AlleyLuckyDrawAnimationUtils {
         });
     }
 
-    public void onResponse() {
+    public void updateDrawResponse(String result) {
         isResponse = true;
+        mDrawResult = result;
+        mResultTextView.setText(result);
     }
 
     private void repeat() {
@@ -85,8 +99,8 @@ public class AlleyLuckyDrawAnimationUtils {
                 R.drawable.sp_lion_2,
                 R.drawable.sp_lion_3};
 
-        repeatAnimation = new FrameAnimation(mAnimationImageView, repeatArray, 200, true);
-        repeatAnimation.setAnimationListener(new FrameAnimation.AnimationListener() {
+        mRepeatAnimation = new FrameAnimation(mAnimationImageView, repeatArray, 500, true);
+        mRepeatAnimation.setAnimationListener(new FrameAnimation.AnimationListener() {
             @Override
             public void onAnimationStart() {
                 DKLog.d(TAG, Trace.getCurrentMethod());
@@ -102,7 +116,7 @@ public class AlleyLuckyDrawAnimationUtils {
                 DKLog.d(TAG, Trace.getCurrentMethod());
                 /* TODO waiting for api response */
                 if (isResponse) {
-                    repeatAnimation.pauseAnimation();
+                    mRepeatAnimation.pauseAnimation();
                     end();
                 }
             }
@@ -119,8 +133,8 @@ public class AlleyLuckyDrawAnimationUtils {
                 R.drawable.sp_lion_4,
                 R.drawable.sp_lion_5};
 
-        endAnimation = new FrameAnimation(mAnimationImageView, endArray, 200, false);
-        endAnimation.setAnimationListener(new FrameAnimation.AnimationListener() {
+        mEndAnimation = new FrameAnimation(mAnimationImageView, endArray, 500, false);
+        mEndAnimation.setAnimationListener(new FrameAnimation.AnimationListener() {
             @Override
             public void onAnimationStart() {
                 DKLog.d(TAG, Trace.getCurrentMethod());
@@ -169,16 +183,16 @@ public class AlleyLuckyDrawAnimationUtils {
     }
 
     public void pause() {
-        if(startAnimation != null) {
-            startAnimation.pauseAnimation();
+        if(mStartAnimation != null) {
+            mStartAnimation.pauseAnimation();
         }
 
-        if(repeatAnimation != null) {
-            repeatAnimation.pauseAnimation();
+        if(mRepeatAnimation != null) {
+            mRepeatAnimation.pauseAnimation();
         }
 
-        if(endAnimation != null) {
-            endAnimation.pauseAnimation();
+        if(mEndAnimation != null) {
+            mEndAnimation.pauseAnimation();
         }
     }
 

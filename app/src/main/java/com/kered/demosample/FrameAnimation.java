@@ -203,6 +203,7 @@ public class FrameAnimation {
                         mAnimationListener.onAnimationStart();
                     }
                 }
+                mAnimationListener.onProgress(i);
                 mImageView.setBackgroundResource(mFrameRess[i]);
                 if (i == mLastFrame) {
                     if (mIsRepeat) {

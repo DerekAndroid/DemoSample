@@ -9,4 +9,8 @@
     <color name="color_red_light">#FFB4B6</color>
     <color name="color_blue">#03A9F4</color>
     <color name="color_gray_light">#F5F5F5</color>
+
+
+    <color name="color_lucky_draw_orange">#fcb837</color>
+    <color name="color_lucky_draw_red">#c62539</color>
 </resources>
