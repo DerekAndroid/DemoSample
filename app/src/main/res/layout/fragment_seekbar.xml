@@ -1,85 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#94000000"
     android:orientation="vertical">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:background="#94000000"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <com.xw.repo.BubbleSeekBar
-        android:id="@+id/seekBar1"
+        </android.support.design.widget.AppBarLayout>
+
+        <com.xw.repo.BubbleSeekBar
+            android:id="@+id/seekBar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appBar"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp" />
+
+        <com.xw.repo.BubbleSeekBar
+            android:id="@+id/seekBar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBar1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/gif_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/seekBar2"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/animate_exchanged" />
+
+        <ImageView
+            android:id="@+id/gif_imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gif_imageView"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/gif_imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gif_imageView1"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/gif_imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gif_imageView2"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/gif_simpleDraweeView"
+            android:layout_below="@id/gif_imageView3"
+            android:layout_centerHorizontal="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            />
+    </RelativeLayout>
+
+    <!--底部弹出框-->
+    <LinearLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appBar"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_purple"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
 
-    <com.xw.repo.BubbleSeekBar
-        android:id="@+id/seekBar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/seekBar1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="8dp" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="首页" />
 
-    <ImageView
-        android:id="@+id/gif_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/seekBar2"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/animate_exchanged" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="课程" />
 
-    <ImageView
-        android:id="@+id/gif_imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gif_imageView"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@mipmap/ic_launcher" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="我的" />
 
-    <ImageView
-        android:id="@+id/gif_imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gif_imageView1"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@mipmap/ic_launcher" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
 
-    <ImageView
-        android:id="@+id/gif_imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gif_imageView2"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@mipmap/ic_launcher" />
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/gif_simpleDraweeView"
-        android:layout_below="@id/gif_imageView3"
-        android:layout_centerHorizontal="true"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        />
-</RelativeLayout>

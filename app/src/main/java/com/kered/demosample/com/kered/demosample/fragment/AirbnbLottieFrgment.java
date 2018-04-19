@@ -2,6 +2,7 @@ package com.kered.demosample.com.kered.demosample.fragment;
 
 
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.kered.demosample.LottieToggleAnimationView;
 import com.kered.demosample.R;
 import com.kered.dklog.DKLog;
 import com.kered.dklog.Trace;
+
 
 /**
  * Created by derek_chang on 2017/11/7.

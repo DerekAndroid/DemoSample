@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class BubbleSeekBarFrgment extends Fragment {
     private ImageView mGifImageView2;
     private ImageView mGifImageView3;
     private SimpleDraweeView mSimpleDraweeView;
-
+    private BottomSheetBehavior mBottomSheetBehavior;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -107,6 +108,23 @@ public class BubbleSeekBarFrgment extends Fragment {
         Glide.with(this).load(R.raw.animate_loading_xxx).into(imageView3Target);
 
         updateCustomGidView(R.drawable.animate_exchanged_1206);
+
+
+        // 拿到这个tab_layout对应的BottomSheetBehavior
+        mBottomSheetBehavior = BottomSheetBehavior.from(mMainLayout.findViewById(R.id.tab_layout));
+
+        mSimpleDraweeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 控制展开还是关闭
+                if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+            }
+        });
+
 
     }
 
